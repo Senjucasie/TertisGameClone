@@ -4,15 +4,52 @@ using UnityEngine;
 
 public class Shape : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private bool _rotate;
+    private const int rotateMagnitude = 90;
+
+    private void Move(Vector3 position)
     {
-        
+        transform.position += position;
+    }
+  
+    private void Rotate(Vector3 angle)
+    {
+        transform.Rotate(angle);
+    }   
+
+    public void MoveRight()
+    {
+        Move(Vector3.right);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void MoveLeft()
     {
-        
+        Move(Vector3.left);
+    }
+
+    public void MoveTop()
+    {
+        Move(Vector3.up);
+    }
+
+    public void MoveBottom()
+    {
+        Move(Vector3.down);
+    }
+
+    public void RotateRight()
+    {
+        if (!_rotate)
+            return;
+
+       Rotate(Vector3.forward * rotateMagnitude);
+    }
+
+    public void RotateLeft()
+    {
+        if (!_rotate)
+            return;
+
+       Rotate(Vector3.forward * rotateMagnitude);
     }
 }
