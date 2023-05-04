@@ -4,6 +4,12 @@ public class Spawner:MonoBehaviour
 {
     [SerializeField]private Shape[] _shapeArray;
 
+    private void Start()
+    {
+        Vector2 position =Vector2Int.RoundToInt(new Vector2(transform.position.x, transform.position.y));
+        transform.position = position;
+    }
+
     private Shape GetRandomShape()
     {
         Shape shape = _shapeArray[Random.Range(0, _shapeArray.Length)];
