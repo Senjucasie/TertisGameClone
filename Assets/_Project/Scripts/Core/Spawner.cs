@@ -1,3 +1,5 @@
-﻿internal class Spawner
+﻿using UnityEngine;
+
+public class Spawner:MonoBehaviour
 {
 }
