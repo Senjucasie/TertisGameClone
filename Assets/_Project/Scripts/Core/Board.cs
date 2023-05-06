@@ -37,7 +37,7 @@ public class Board : MonoBehaviour
     }
     bool IsGridOccupied(int x, int y,Shape shape)
     {
-        return _grid[x, y] != null ;
+        return _grid[x, y] != null&& _grid[x,y].parent!=shape.transform ;
     }
     bool IsWithinBoard(int x, int y)
     {
