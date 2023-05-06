@@ -31,6 +31,12 @@ public class GameController : MonoBehaviour
             {
                 _timeForDrop = 0;
                 _activeShape.MoveBottom();
+
+                if(!_board.IsValidPosition(_activeShape))
+                {
+                    _activeShape.MoveTop();
+                    _activeShape = _spawner.SpawnShape();
+                }
             }
         }
     }

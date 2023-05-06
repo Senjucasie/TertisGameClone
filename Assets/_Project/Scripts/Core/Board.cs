@@ -32,4 +32,20 @@ public class Board : MonoBehaviour
             }
         }
     }
+
+    bool IsWithinBoard(int x, int y)
+    {
+        return x >= 0 && x <= _horizontalGrid && y >= 0;    
+    }
+
+    public bool IsValidPosition(Shape currentshape)
+    {
+        foreach(Transform square in currentshape.transform)
+        {
+         if (!IsWithinBoard((int)square.position.x, (int)square.position.y))
+            return false;
+        }
+
+    return true;
+    }
 }

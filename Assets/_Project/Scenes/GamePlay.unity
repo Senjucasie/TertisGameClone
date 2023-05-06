@@ -503,7 +503,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _board: {fileID: 1654016826}
   _spawner: {fileID: 909349573}
-  _dropInterval: 0.4
+  _dropInterval: 0.5
 --- !u!4 &689923808
 Transform:
   m_ObjectHideFlags: 0
