@@ -35,6 +35,7 @@ public class GameController : MonoBehaviour
                 if(!_board.IsValidPosition(_activeShape))
                 {
                     _activeShape.MoveTop();
+                    _board.StoreInGrid(_activeShape);
                     _activeShape = _spawner.SpawnShape();
                 }
             }

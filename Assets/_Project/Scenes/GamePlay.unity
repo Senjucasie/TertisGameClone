@@ -899,7 +899,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e1199997536e674c916b56793f355e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _grid: {fileID: 1171617427241906018, guid: 96870b2a82822cb49849447909fbdc0e, type: 3}
+  _gridSprite: {fileID: 1171617427241906018, guid: 96870b2a82822cb49849447909fbdc0e, type: 3}
   _verticalGrid: 21
   _horizontalGrid: 10
 --- !u!4 &1654016827
