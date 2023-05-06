@@ -4,7 +4,7 @@ public class Spawner:MonoBehaviour
 {
     [SerializeField]private Shape[] _shapeArray;
 
-    private void Start()
+    private void Awake()
     {
         Vector2 position =Vector2Int.RoundToInt(new Vector2(transform.position.x, transform.position.y));
         transform.position = position;

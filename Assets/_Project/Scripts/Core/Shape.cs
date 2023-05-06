@@ -39,17 +39,15 @@ public class Shape : MonoBehaviour
 
     public void RotateRight()
     {
-        if (!_rotate)
-            return;
+        if (!_rotate) return;
 
        Rotate(Vector3.forward * rotateMagnitude);
     }
 
     public void RotateLeft()
     {
-        if (!_rotate)
-            return;
-
-       Rotate(Vector3.forward * rotateMagnitude);
+        if (!_rotate)  return;
+        
+        Rotate(Vector3.forward * rotateMagnitude);
     }
 }

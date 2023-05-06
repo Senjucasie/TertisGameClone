@@ -503,6 +503,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _board: {fileID: 1654016826}
   _spawner: {fileID: 909349573}
+  _dropInterval: 0.4
 --- !u!4 &689923808
 Transform:
   m_ObjectHideFlags: 0
@@ -531,7 +532,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -563,7 +564,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 909349572}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.42, y: 22.17, z: -1}
+  m_LocalPosition: {x: 4, y: 22.227, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -704,6 +705,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8005104661138262657, guid: 0c9393f7992e9414f9eccdf6a28040e8, type: 3}
       propertyPath: m_PresetInfoIsWorld
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8005104661138262657, guid: 0c9393f7992e9414f9eccdf6a28040e8, type: 3}
+      propertyPath: m_MatchWidthOrHeight
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8005104661138262659, guid: 0c9393f7992e9414f9eccdf6a28040e8, type: 3}
