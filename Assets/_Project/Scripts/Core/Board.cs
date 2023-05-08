@@ -25,7 +25,7 @@ public class Board : MonoBehaviour
 
     private void DrawGrid(GameObject _gridSprite)
     {
-        for(int vertical=0;vertical<=_verticalGrid;vertical++)
+        for(int vertical=0;vertical<_verticalGrid;vertical++)
         {
             for(int horizontal=0;horizontal<_horizontalGrid;horizontal++)
             {
@@ -37,18 +37,21 @@ public class Board : MonoBehaviour
     }
     bool IsGridOccupied(int x, int y,Shape shape)
     {
+        Debug.Log($"{ x},,,{ y}");
         return _grid[x, y] != null&& _grid[x,y].parent!=shape.transform ;
+        
     }
     bool IsWithinBoard(int x, int y)
     {
-        return x >= 0 && x <= _horizontalGrid && y >= 0;    
+        return x >= 0 && x < _horizontalGrid && y >= 0;    
     }
 
     public bool IsValidPosition(Shape currentshape)
     {
         foreach(Transform square in currentshape.transform)
         {
-         if (!IsWithinBoard((int)square.position.x, (int)square.position.y)|| IsGridOccupied((int)square.position.x, (int)square.position.y,currentshape))
+         if (!IsWithinBoard((int)square.position.x, (int)square.position.y) || 
+            IsGridOccupied((int)square.position.x, (int)square.position.y,currentshape))
             return false;
         }
 
@@ -58,6 +61,7 @@ public class Board : MonoBehaviour
     public void StoreInGrid(Shape shape)
     {
     if (shape == null) return;
+
         foreach(Transform square in shape.transform)
         {
             _grid[(int)square.position.x, (int)square.position.y] = shape.transform;
