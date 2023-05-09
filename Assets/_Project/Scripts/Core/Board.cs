@@ -9,11 +9,13 @@ public class Board : MonoBehaviour
 
     [SerializeField] Transform[,] _grid;    
 
-    [SerializeField]private int _verticalGrid, _horizontalGrid;
+    [SerializeField]private int _width, _height;
+
+    [SerializeField] private int _header;
 
     void Start()
     {
-        _grid = new Transform[_horizontalGrid, 30];
+        _grid = new Transform[_width, _height];
         DrawGrid(_gridSprite);
     }
 
@@ -25,47 +27,108 @@ public class Board : MonoBehaviour
 
     private void DrawGrid(GameObject _gridSprite)
     {
-        for(int vertical=0;vertical<_verticalGrid;vertical++)
+        for(int y=0;y<_height-_header;y++)
         {
-            for(int horizontal=0;horizontal<_horizontalGrid;horizontal++)
+            for(int x=0;x<_width; x++)
             {
-                GameObject spawnedgrid = Instantiate(_gridSprite, new Vector3(horizontal, vertical, 0), Quaternion.identity) ;
-                spawnedgrid.name = "Grid" + vertical +"," +horizontal;
+                GameObject spawnedgrid = Instantiate(_gridSprite, new Vector3(x, y, 0), Quaternion.identity) ;
+                spawnedgrid.name = "Grid" + x +"," +y;
                 spawnedgrid.transform.parent = transform;
             }
         }
     }
-    bool IsGridOccupied(int x, int y,Shape shape)
+
+    private bool IsGridOccupied(int x, int y,Shape shape)
     {
-        Debug.Log($"{ x},,,{ y}");
-        return _grid[x, y] != null&& _grid[x,y].parent!=shape.transform ;
+        
+        return (_grid[x, y] != null &&  _grid[x,y].parent != shape.transform) ;
         
     }
-    bool IsWithinBoard(int x, int y)
+
+    private bool IsWithinBoard(int x, int y)
     {
-        return x >= 0 && x < _horizontalGrid && y >= 0;    
+        return (x >= 0 && x < _width && y >= 0);    
     }
 
     public bool IsValidPosition(Shape currentshape)
     {
+        
         foreach(Transform square in currentshape.transform)
         {
-         if (!IsWithinBoard((int)square.position.x, (int)square.position.y) || 
-            IsGridOccupied((int)square.position.x, (int)square.position.y,currentshape))
-            return false;
+            Vector2 pos = Vectorf.Round(square.position);
+            if (!IsWithinBoard((int)pos.x, (int)pos.y) || 
+            IsGridOccupied((int)pos.x, (int)pos.y,currentshape))
+                return false;
         }
 
     return true;
     }
 
-    public void StoreInGrid(Shape shape)
+    public void StoreShapeInGrid(Shape shape)
     {
-    if (shape == null) return;
+        if (shape == null) return;  
 
         foreach(Transform square in shape.transform)
         {
-            _grid[(int)square.position.x, (int)square.position.y] = shape.transform;
+            Vector2 pos = Vectorf.Round(square.position);
+            _grid[(int)pos.x, (int)pos.y] = square;
         }
 
+    }
+
+    private bool IsRowFilled(int y)
+    {
+        for(int x=0; x<_width; x++)
+        {
+            if(_grid[x,y]==null) return false;
+        }
+        return true;
+    }
+
+    private void ClearRow(int y)
+    {
+        for (int x = 0; x < _width; x++)
+        {
+            if(_grid[x,y]!=null)
+            {
+                Destroy(_grid[x, y].gameObject);
+                
+            }
+            _grid[x, y] = null;
+        }
+    }
+
+    private void ShiftOneRowDown(int y)
+    {
+        for(int x=0; x<_width;x++ )
+        {
+            if(_grid[x,y]!=null)
+            {
+                _grid[x, y - 1] = _grid[x, y];
+                _grid[x, y] = null;
+                _grid[x, y - 1].position += Vector3.down;
+            }
+        }
+    }
+
+    private void ShiftRowsDown(int startY)
+    {
+        for(int y=startY; y<_height; y++)
+        {
+            ShiftOneRowDown(y);
+        }
+    }
+
+    public void ClearAllRows()
+    {
+    for (int y=0;y<_height;y++)
+    {
+        if(IsRowFilled(y))
+        {
+            ClearRow(y);
+            ShiftRowsDown(y + 1);
+            y--;
+        }
+    }
     }
 }

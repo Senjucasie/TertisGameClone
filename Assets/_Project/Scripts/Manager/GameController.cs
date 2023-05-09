@@ -49,12 +49,18 @@ public class GameController : MonoBehaviour
 
                 if(!_board.IsValidPosition(_activeShape))
                 {
-                    _activeShape.MoveTop();
-                    _board.StoreInGrid(_activeShape);
-                    _activeShape = _spawner.SpawnShape();
+                    LandShape();
                 }
             }
-        }
+        }   
+    }
+
+    private void LandShape()
+    {
+        _activeShape.MoveTop();
+        _board.StoreShapeInGrid(_activeShape);
+        _activeShape = _spawner.SpawnShape();
+        _board.ClearAllRows();
     }
 
     private void Right()
@@ -81,7 +87,7 @@ public class GameController : MonoBehaviour
 
         if (!_board.IsValidPosition(_activeShape))
         {
-            _activeShape.MoveTop();
+        _activeShape.MoveTop();
         }
     }
 
