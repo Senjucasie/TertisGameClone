@@ -121,14 +121,26 @@ public class Board : MonoBehaviour
 
     public void ClearAllRows()
     {
-    for (int y=0;y<_height;y++)
-    {
-        if(IsRowFilled(y))
+        for (int y=0;y<_height;y++)
         {
-            ClearRow(y);
-            ShiftRowsDown(y + 1);
-            y--;
+            if(IsRowFilled(y))
+            {
+                ClearRow(y);
+                ShiftRowsDown(y + 1);
+                y--;
+            }
         }
     }
+
+    public bool isOverLimit(Shape shape)
+    {
+        foreach(Transform child in shape.transform)
+        {
+            if(child.position.y>_height-_header-1)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
